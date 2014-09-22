@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax Test Runner</title>
+    <link rel="stylesheet" href="../../lib/mocha/mocha.css">
+    <script src="../../lib/seajs/sea.js"></script>
+    <script src="../../lib/mocha/mocha.js"></script>
+    <!-- // <script src="../../lib/jquery/jquery-1.10.2.min.js"></script> -->
+    <script src="http://cdn.staticfile.org/json2/20130526/json2.min.js"></script>
+    <script src="http://cdn.staticfile.org/jquery/1.11.1/jquery.js"></script>
+    <script src="../../lib/mockjax/jquery.mockjax.js"></script>
+</head>
+<body>
+    <div id="mocha"></div>
+
+    <form action="http://test2.ajax.com:8080" method="post" id="form" style="display:none;">
+        <input type="text" name="text" value=""><br />
+        <input type="text" name="text2" value="aaa"><br />
+        <input type="password" name="password" value="bbb"><br />
+        <textarea name="textarea">这是一个测试</textarea><br />
+        <input type="radio" name="radio" value="aaa">aaa
+        <input type="radio" name="radio" value="bbb" checked>bbb<br />
+        <input type="checkbox" name="checkbox" value="aaa" checked>aaa
+        <input type="checkbox" name="checkbox" value="bbb" checked>bbb<br />
+        <select name="select">
+            <option value="aaa">aaa</option>
+            <option value="bbb" selected>bbb</option>
+            <option value="ccc">ccc</option>
+        </select>
+        <select name="select2" multiple="multiple" value="aaaa,bbbb">
+            <option value="aaaa">aaaa</option>
+            <option value="bbbb">bbbb</option>
+            <option value="cccc" selected>cccc</option>
+            <option value="dddd" selected>dddd</option>
+            <option value="eeee" selected>eeee</option>
+        </select>
+        <br />
+        <input type="submit" value="提交">
+    </form>
+
+    <script>
+        seajs.config({
+            base : '/',
+            alias : {
+                'expect' : 'lib/expect/expect.js',
+                'sinon' : 'lib/sinon/sinon-1.7.1.js',
+                'ajax' : 'dist/ajax.js'
+            }
+        });
+
+        mocha.setup('bdd');
+
+        seajs.use(['./ajax-test.js'], function(){
+            mocha.run();
+        });
+        </script>
+</body>
+</html>
