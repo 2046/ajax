@@ -65,7 +65,7 @@ define(function(require, exports, module){
         var a = document.createElement('a');
         a.href = url;
     
-        return a.host != location.host;
+        return a.origin != location.origin;
     };
     
     function preventRepeatSubmit(opt){
