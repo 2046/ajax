@@ -69,7 +69,7 @@ define(function(require, exports, module){
     };
     
     function preventRepeatSubmit(opt){
-        var beforeSend, complete;
+        var beforeSend, complete, result;
     
         complete = opt.complete;
         beforeSend = opt.beforeSend;
@@ -77,13 +77,15 @@ define(function(require, exports, module){
         opt.beforeSend = function(){
             var uid = uniqueCid(opt);
     
-            beforeSend && beforeSend.apply(opt, arguments);
+            result = beforeSend && beforeSend.apply(opt, arguments);
     
             if(indexOf(cache, uid) == -1){
                 cache.push(uid);
             }else{
                 return false;
             }
+            
+            return result;
         };
     
         opt.complete = function(){
